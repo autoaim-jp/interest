@@ -4,22 +4,27 @@
   --muted: #5f6662;
   --paper: #fbfbf7;
   --line: #d9ddd4;
+  --soft: #eef3ef;
   --green: #2f6f5f;
+  --blue: #276b85;
+  --white: #ffffff;
+  --shadow: 0 14px 34px rgba(32, 33, 35, 0.1);
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+
 body {
-  min-height: 100vh;
   margin: 0;
-  display: grid;
-  place-items: center;
-  padding: 32px;
   color: var(--ink);
   background:
-    linear-gradient(135deg, rgba(47, 111, 95, 0.1), rgba(255, 255, 255, 0) 42%),
+    linear-gradient(135deg, rgba(47, 111, 95, 0.08), rgba(39, 107, 133, 0.07) 48%, rgba(255, 255, 255, 0) 78%),
     var(--paper);
   font-family:
     "Hiragino Kaku Gothic ProN",
@@ -30,38 +35,12 @@ body {
   line-height: 1.75;
 }
 
-.site-shell {
-  width: min(720px, 100%);
-  padding: 40px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.78);
-}
-
-.eyebrow {
-  margin: 0 0 12px;
-  color: var(--green);
-  font-size: 13px;
-  font-weight: 850;
-  letter-spacing: 0;
-}
-
-h1 {
-  margin: 0;
-  font-size: clamp(34px, 6vw, 56px);
-  line-height: 1.12;
-  letter-spacing: 0;
-}
-
-p:not(.eyebrow) {
-  margin: 20px 0 0;
-  color: var(--muted);
-  font-size: 17px;
+img {
+  display: block;
+  max-width: 100%;
 }
 
 a {
-  margin-top: 28px;
-  display: inline-flex;
   color: var(--green);
   font-weight: 850;
   text-decoration: underline;
@@ -69,12 +48,206 @@ a {
   text-underline-offset: 4px;
 }
 
-@media (max-width: 640px) {
-  body {
-    padding: 18px;
+a:focus-visible {
+  outline: 3px solid rgba(47, 111, 95, 0.3);
+  outline-offset: 4px;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 32px;
+  border-bottom: 1px solid rgba(217, 221, 212, 0.82);
+  background: rgba(251, 251, 247, 0.92);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  justify-content: flex-end;
+}
+
+.nav a {
+  color: var(--ink);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--green);
+}
+
+.hero {
+  width: min(1180px, calc(100% - 64px));
+  min-height: 56vh;
+  margin: 0 auto;
+  display: grid;
+  align-content: end;
+  padding: 96px 0 68px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  max-width: 880px;
+  font-size: clamp(42px, 7vw, 82px);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.hero p:not(.eyebrow) {
+  max-width: 720px;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.section {
+  width: min(1180px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 40px 0 72px;
+}
+
+.section-heading {
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.interest-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.interest-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.interest-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--soft);
+}
+
+.interest-card h3 {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  font-size: 16px;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.site-footer {
+  width: min(1180px, calc(100% - 64px));
+  min-height: 96px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 980px) {
+  .interest-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  html {
+    scroll-padding-top: 0;
   }
 
-  .site-shell {
-    padding: 28px;
+  .site-header {
+    position: static;
+    display: block;
+    padding: 16px 18px;
+  }
+
+  .nav {
+    margin-top: 10px;
+    justify-content: flex-start;
+  }
+
+  .hero,
+  .section,
+  .site-footer {
+    width: min(100% - 36px, 1180px);
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 64px 0 48px;
+  }
+
+  .interest-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .interest-card h3 {
+    min-height: 54px;
+    padding: 12px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 460px) {
+  .interest-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer {
+    display: block;
+    padding: 24px 0;
+  }
+
+  .site-footer a {
+    margin-top: 8px;
+    display: inline-flex;
   }
 }
