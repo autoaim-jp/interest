@@ -9,7 +9,7 @@
     article.setAttribute("aria-label", item.title + "の写真を見る");
 
     var img = document.createElement("img");
-    img.src = item.images[0];
+    img.src = item.images[0].src;
     img.alt = item.title;
     img.loading = "lazy";
     article.appendChild(img);
@@ -27,10 +27,6 @@
     var h3 = document.createElement("h3");
     h3.textContent = item.title;
     body.appendChild(h3);
-
-    var p = document.createElement("p");
-    p.textContent = item.comment;
-    body.appendChild(p);
 
     article.appendChild(body);
 
@@ -64,6 +60,7 @@
 
   // ライトボックス ---------------------------------------------------
   var lightbox = document.querySelector(".image-lightbox");
+  var lightboxTitle = lightbox.querySelector(".image-lightbox-title");
   var lightboxImage = lightbox.querySelector(".image-lightbox-image");
   var lightboxCaption = lightbox.querySelector(".image-lightbox-caption");
   var lightboxThumbs = lightbox.querySelector(".image-lightbox-thumbs");
@@ -74,8 +71,10 @@
 
   function showImage(index) {
     currentIndex = index;
-    lightboxImage.src = currentItem.images[index];
+    var image = currentItem.images[index];
+    lightboxImage.src = image.src;
     lightboxImage.alt = currentItem.title;
+    lightboxCaption.textContent = image.caption;
     Array.prototype.forEach.call(
       lightboxThumbs.querySelectorAll("img"),
       function (thumb, i) {
@@ -86,13 +85,13 @@
 
   function openLightbox(item) {
     currentItem = item;
-    lightboxCaption.textContent = item.title + " — " + item.comment;
+    lightboxTitle.textContent = item.title;
     lightboxThumbs.innerHTML = "";
 
     if (item.images.length > 1) {
-      item.images.forEach(function (src, i) {
+      item.images.forEach(function (image, i) {
         var thumb = document.createElement("img");
-        thumb.src = src;
+        thumb.src = image.src;
         thumb.alt = item.title + " " + (i + 1);
         thumb.addEventListener("click", function (e) {
           e.stopPropagation();

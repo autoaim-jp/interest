@@ -204,13 +204,6 @@ h2 {
   letter-spacing: 0;
 }
 
-.interest-card p {
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
 .image-lightbox {
   position: fixed;
   inset: 0;
@@ -236,9 +229,17 @@ h2 {
   cursor: default;
 }
 
+.image-lightbox-title {
+  max-width: min(100%, 820px);
+  margin: 0;
+  color: var(--white);
+  font-size: 20px;
+  text-align: center;
+}
+
 .image-lightbox-image {
   max-width: min(100%, 920px);
-  max-height: 68vh;
+  max-height: 62vh;
   display: block;
   object-fit: contain;
   border-radius: 8px;
@@ -249,9 +250,9 @@ h2 {
 .image-lightbox-caption {
   max-width: min(100%, 820px);
   margin: 0;
-  color: var(--white);
-  font-size: 15px;
-  font-weight: 700;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 14px;
+  line-height: 1.6;
   text-align: center;
 }
 
