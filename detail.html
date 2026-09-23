@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>趣味の詳細 | 趣味と関心 | Yuma Toyooka</title>
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">Interest</a>
+      <nav class="nav" aria-label="主要ナビゲーション">
+        <a href="/#hobbies">趣味一覧</a>
+        <a href="/#challenges">これから挑戦</a>
+        <a href="https://toyooka.me/">toyooka.me</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <nav class="breadcrumb" aria-label="パンくずリスト">
+          <a href="/">ホーム</a>
+          <a href="/" data-back-link>趣味一覧</a>
+          <span aria-current="page" data-crumb-title></span>
+        </nav>
+        <h1 data-title></h1>
+      </section>
+
+      <section class="section">
+        <div class="interest-grid" data-tiles></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Interest</span>
+      <a href="https://toyooka.me/">toyooka.me に戻る</a>
+    </footer>
+
+    <div class="image-lightbox" aria-hidden="true">
+      <div class="image-lightbox-panel">
+        <button type="button" class="image-lightbox-close" aria-label="閉じる">×</button>
+        <h3 class="image-lightbox-title"></h3>
+        <img class="image-lightbox-image" src="" alt="">
+        <p class="image-lightbox-caption"></p>
+      </div>
+    </div>
+
+    <script src="/data.js"></script>
+    <script src="/detail.js"></script>
+  </body>
+</html>

@@ -2,23 +2,21 @@
   var hobbies = window.INTEREST_HOBBIES || [];
 
   function createCard(item) {
-    var article = document.createElement("article");
-    article.className = "interest-card";
-    article.tabIndex = 0;
-    article.setAttribute("role", "button");
-    article.setAttribute("aria-label", item.title + "の写真を見る");
+    var a = document.createElement("a");
+    a.className = "interest-card";
+    a.href = "detail.html?hobby=" + encodeURIComponent(item.id);
 
     var img = document.createElement("img");
     img.src = item.images[0].src;
     img.alt = item.title;
     img.loading = "lazy";
-    article.appendChild(img);
+    a.appendChild(img);
 
     if (item.images.length > 1) {
       var badge = document.createElement("span");
       badge.className = "interest-card-count";
       badge.textContent = "+" + (item.images.length - 1);
-      article.appendChild(badge);
+      a.appendChild(badge);
     }
 
     var body = document.createElement("div");
@@ -28,19 +26,9 @@
     h3.textContent = item.title;
     body.appendChild(h3);
 
-    article.appendChild(body);
+    a.appendChild(body);
 
-    article.addEventListener("click", function () {
-      openLightbox(item);
-    });
-    article.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        openLightbox(item);
-      }
-    });
-
-    return article;
+    return a;
   }
 
   function renderGrid(selector, group) {
@@ -57,73 +45,4 @@
 
   renderGrid("[data-hobbies]", "hobby");
   renderGrid("[data-challenges]", "challenge");
-
-  // ライトボックス ---------------------------------------------------
-  var lightbox = document.querySelector(".image-lightbox");
-  var lightboxTitle = lightbox.querySelector(".image-lightbox-title");
-  var lightboxImage = lightbox.querySelector(".image-lightbox-image");
-  var lightboxCaption = lightbox.querySelector(".image-lightbox-caption");
-  var lightboxThumbs = lightbox.querySelector(".image-lightbox-thumbs");
-  var lightboxClose = lightbox.querySelector(".image-lightbox-close");
-
-  var currentItem = null;
-  var currentIndex = 0;
-
-  function showImage(index) {
-    currentIndex = index;
-    var image = currentItem.images[index];
-    lightboxImage.src = image.src;
-    lightboxImage.alt = currentItem.title;
-    lightboxCaption.textContent = image.caption;
-    Array.prototype.forEach.call(
-      lightboxThumbs.querySelectorAll("img"),
-      function (thumb, i) {
-        thumb.classList.toggle("is-active", i === index);
-      }
-    );
-  }
-
-  function openLightbox(item) {
-    currentItem = item;
-    lightboxTitle.textContent = item.title;
-    lightboxThumbs.innerHTML = "";
-
-    if (item.images.length > 1) {
-      item.images.forEach(function (image, i) {
-        var thumb = document.createElement("img");
-        thumb.src = image.src;
-        thumb.alt = item.title + " " + (i + 1);
-        thumb.addEventListener("click", function (e) {
-          e.stopPropagation();
-          showImage(i);
-        });
-        lightboxThumbs.appendChild(thumb);
-      });
-      lightboxThumbs.hidden = false;
-    } else {
-      lightboxThumbs.hidden = true;
-    }
-
-    showImage(0);
-    lightbox.classList.add("is-open");
-    document.body.classList.add("lightbox-open");
-  }
-
-  function closeLightbox() {
-    lightbox.classList.remove("is-open");
-    document.body.classList.remove("lightbox-open");
-    currentItem = null;
-  }
-
-  lightboxClose.addEventListener("click", closeLightbox);
-  lightbox.addEventListener("click", function (e) {
-    if (e.target === lightbox) closeLightbox();
-  });
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && lightbox.classList.contains("is-open")) {
-      closeLightbox();
-    }
-  });
-
-  window.__openInterestLightbox = openLightbox;
 })();
